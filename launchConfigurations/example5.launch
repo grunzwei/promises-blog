@@ -5,10 +5,10 @@
       "Node": "node",
       "NodeParams": "",
       "WorkDir": "/workdir/grunzwei-fresh/promises-blog",
-      "JSFile": "/workdir/grunzwei-fresh/promises-blog/examples/example1.js",
+      "JSFile": "/workdir/grunzwei-fresh/promises-blog/examples/example5.js",
       "AppParameters": ""
     },
-    "Name": "example 1 - async function with callback"
+    "Name": "example 5 - problem when catching asynchronous exceptions"
   },
   "Type": "NodeRunner"
 }
