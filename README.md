@@ -104,6 +104,15 @@ back to your examples, now with promises:
 
 #4. promise chaining
 
+in some libraries, invoking the then function of a promise (let's call it original promise) returns another promise! (let's call it chained promise)
+this new promise is resolved/rejected according to the logic inside the success/failure handler.
+this allows us to chain promises. 
+this has several advantages:
+1. decreases nesting.
+2. register a failure handler for all previous invoked promises.
+we can still register several failure handlers, and as errors propagate the first error handler reached will be invoked.
+if it returns a reject promise, or throws an exception, a new error will propagate to the next error handler, otherwise we will continue on with the success handlers.
+
 [promise chaining example 8](examples/example8.js)
 
 5. Q library (nfcall, ninvoke, Q(), Q.reject(), Q.all())
