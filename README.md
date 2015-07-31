@@ -10,16 +10,14 @@ we'll be using misc async modules to make our point, based on mock "setTimeout" 
 #1. async programming in nodejs - standard node callbacks
 
 the most basic way of handling async operations in node is by using callbacks, and that's what most libraries offer.
-
-they will give an api like the one below (usage example included):
-
-[a mock 3rd party library with asynchronous callbacks can be found at example 1](examples/example1.js)
-
-[usage can be seen at example 2](examples/example2.js)
+we invoke the function, the function performs some operation in an async manner and the callback that we passed as an argument is invoked with the result, allowing us to handle the result and continue our applicative flow.
 
 note that in the asynchronous callback function, the first parameter is almost always an error.
 if the function ran successfully, the error object is usually null or undefined.
 any remaining arguments are in case of success and should only be regarded if the error object is falsy.
+
+[a mock 3rd party library with asynchronous callbacks can be found at example 1](examples/example1.js)
+[usage can be seen at example 2](examples/example2.js)
 
 #2. pain
 
