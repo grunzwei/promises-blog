@@ -1,0 +1,31 @@
+{
+  "name": "promises-blog",
+  "version": "1.0.0",
+  "description": "a blog entry about how to use promises with examples",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "q": "^1.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://aeb1b89e5db06d60ba88ed034a9072b5f2c94088@github.com/grunzwei-fresh/promises-blog.git"
+  },
+  "keywords": [
+    "promises",
+    "q",
+    "methodology"
+  ],
+  "author": "nathan grunzweig (codefresh)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grunzwei-fresh/promises-blog/issues"
+  },
+  "homepage": "https://github.com/grunzwei-fresh/promises-blog#readme"
+}

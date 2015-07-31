@@ -3,10 +3,8 @@ a blog about proper promises methodology
 
 #our real-life promises methodology
 
-intro to blog: in this blog we'll present real life best practices that we've gathered for working with promises, the libraries we use, the methodologies we've developed, the common pitfalls we're aware of and how we test such code.
-
+in this blog post we'll present real life best practices that we've gathered for working with promises, the libraries we use, the methodologies we've developed, the common pitfalls we're aware of and how we test such code.
 we'll be starting at the level of a node newbie and progressing as things get more advanced.
-
 we'll be using misc async modules to make our point, based on mock "setTimeout" based examples, through node fs module, mongoose with mongodb and dockerode for controlling docker via remote api.
 
 #1. async programming in nodejs - standard node callbacks
@@ -31,7 +29,6 @@ the most obvious are nesting levels, boilerplate and readability.
 consider the following sum: 1+2+3+4+5. let's have a go:
 
 example 3: <expand ./examples/example3.js>
-
 
 this is a trivial case, and OMG, the horror.
 but now consider another issue. what if sum doesn't strictly agree with its supposed api?
@@ -66,7 +63,7 @@ but with the right methodology you can make sure all your 2nd/1st party code is 
 
 in this example (and henceforth) we'll be using the Q library.
 
-we create a deferred. a deferred
+we create a deferred. 
 
 example 6: <expand ./examples/example6.js>
 
