@@ -49,8 +49,8 @@ many 2nd/3rd party asynchronous functions, and any of those could be suffering f
 
 output: uncaught exception occurred: you'll never catch me!
 
-if you recall from earlier we mentioned that asynchronous functions will be processed at a later time by the nodejs eventloop. that means that those functions run pretty much without context. they're registered - and that's it. so no try catch - which is in the "now". that execution flow is done with. when the async function is invoked, it's a completely different stack trace.
-and yes, due to this, if you throw an exception in the async function you won't know where it's invoked from, usually.
+if you recall from earlier discussion we mentioned that asynchronous functions will be processed at a later time by the nodejs eventloop. that means that those functions run pretty much without context. they're registered - and that's it. so no try catch - which is in the "now". that execution flow is done with. when the async function is invoked, it's a completely different stack trace.
+and yes, due to this, if you throw an exception in the async function you won't know where it's invoked from, usually, in the stacktrace.
 
 #3. promises
 
@@ -58,12 +58,48 @@ to alleviate these issues, we have promises. they won't magically solve everythi
 nothing can help you if an async 3rd party you use which doesn't try catch on an async function internally correctly - there's nothing you can do.
 but with the right methodology you can make sure all your 2nd/1st party code is in the clear.
 
-in this example (and henceforth) we'll be using the Q library.
+promises are compliant to the [Promises/A+ spec](https://promisesaplus.com/), but are usually richer than that.
+in general, you invoke an async function, it returns a promise object which "promises" that something will eventually happen:
+1. the operation will fail
+2. the operation will succeed
+it also supports updates by the async operation.
+in general, there's some method of controlling the behavior of the promise, internal to the async function, which helps you create promises, but is private to you the library writer, and not the consumer.
 
-we create a deferred. 
+in this example (and henceforth) we'll be using the Q library, which supports deferred objects as a method of controling and creating promises.
+
+the deferred/promise mechansim works like so:
+in your async function...
+1. create a deferred object.
+2. in case of success, invoke deferred.resolve(returnValue)
+3. in case of error, invoke deferred.reject(err)
+4. in [optional] case of progress/notification/update, invoke deferred.notify(update object)
+5. return the promise associated with the deferred (and not the deferred itself)
+
+your consume calls your function, and gets back the promise object.
+on the promise object the user can invoke, the then function, with 3 handlers: success, failure and progress.
+promise.then(function(returnValue) {
+	//handle return value
+},
+function (err) {
+	//handle exception
+},
+function (obj) {
+	//handle progress notification
+})
+
+only you, the library writer have access to the deferred and only you can resolve/reject/notify it. it's internal to your code. your consumer has a promise that something will eventually happen, and registers events on that.
+
+different libraries offer additional syntactic sugar functions, such as:
+fail/catch - register only a failure handler
+finally - invoked whether or not success or failure occurred
+progress - register only a notification handler
+done - registers a final set of handlers, with a default error handler (in case no other is registered) to throw exceptions
+
+and many more...
+
+back to your examples, now with promises:
 
 [the original sum function, now using promises in example 6](examples/example6.js)
-
 [promisedSum usage can be found in example 7](examples/example7.js)
 
 #4. promise chaining
