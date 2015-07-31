@@ -1,3 +1,5 @@
+var sum = require('./example1');
+
 try {
   sum(1, 2, function(err, sumResult) {
     if (err) throw err;

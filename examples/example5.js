@@ -1,4 +1,4 @@
-process.on('error', function (err) {
+process.on('uncaughtException', function (err) {
   console.error('uncaught exception occurred: ' + err);
 });
 
