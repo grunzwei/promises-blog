@@ -1,4 +1,6 @@
 
+var Q = require('q');
+
 /**
  * @param: {number} augend - first operand to sum operation
  * @param: {number} addend - second operand to sum operation
