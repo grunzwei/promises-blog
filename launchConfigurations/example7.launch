@@ -1,0 +1,14 @@
+{
+  "ServiceId": "io.codefresh.orion.client.node.runner",
+  "Params": {
+    "Target": {
+      "Node": "node",
+      "NodeParams": "",
+      "WorkDir": "/workdir/grunzwei-fresh/promises-blog",
+      "JSFile": "/workdir/grunzwei-fresh/promises-blog/examples/example1.js",
+      "AppParameters": ""
+    },
+    "Name": "example 1 - async function with callback"
+  },
+  "Type": "NodeRunner"
+}
