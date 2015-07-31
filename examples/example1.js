@@ -21,3 +21,5 @@ function sum(augend, addend, callback) {
     callback(null, augend + addend)
   }, 0);
 }
+
+module.exports = sum;
