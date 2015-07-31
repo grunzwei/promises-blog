@@ -13,22 +13,21 @@ the most basic way of handling async operations in node is by using callbacks, a
 
 they will give an api like the one below (usage example included):
 
-example 1: <expand ./examples/example1.js>
+[a mock 3rd party library with asynchronous callbacks can be found at example 1](examples/example1.js)
 
-example 2: <expand ./examples/example2.js>
+[usage can be seen at example 2](examples/example2.js)
 
 note that in the asynchronous callback function, the first parameter is almost always an error.
 if the function ran successfully, the error object is usually null or undefined.
 any remaining arguments are in case of success and should only be regarded if the error object is falsy.
 
-#2. pain (verbosity, boilerplate, multiple async operations, error handling, nesting level)
+#2. pain
 
 there are several problems with working in this fashion.
 the most obvious are nesting levels, boilerplate and readability.
 
-consider the following sum: 1+2+3+4+5. let's have a go:
-
-example 3: <expand ./examples/example3.js>
+consider the following sum: 1+2+3+4+5.
+[we have a go at example 3](examples/example3.js)
 
 this is a trivial case, and OMG, the horror.
 but now consider another issue. what if sum doesn't strictly agree with its supposed api?
@@ -37,7 +36,7 @@ what if it sometimes throws an exception, even though it's not supposd to do tha
 
 take the above example and wrap every sum invocation with try catch.
 
-example 4: <expand ./examples/example4.js>
+[you should get something like example 4](examples/example4.js)
 
 ok, so it's bad, but at least it's over with!
 
@@ -48,7 +47,7 @@ sum is an asynchronous function, and depending on its implementation you can't a
 in our case we wrote sum and it's mocky and trivial, but in real complex async code, sum could be comprised of
 many 2nd/3rd party asynchronous functions, and any of those could be suffering from the following problem:
 
-example 5: <expand ./examples/example5.js>
+[bad try catch of async function in example 5](examples/example5.js)
 
 output: uncaught exception occurred: you'll never catch me!
 
@@ -65,15 +64,13 @@ in this example (and henceforth) we'll be using the Q library.
 
 we create a deferred. 
 
-example 6: <expand ./examples/example6.js>
+[the original sum function, now using promises in example 6](examples/example6.js)
 
-now let's use the promisedSum function
+[promisedSum usage can be found in example 7](examples/example7.js)
 
-example 7: <expand ./examples/example7.js>
+#4. promise chaining
 
-#4.promise chaining
-
-example 8: <expand ./examples/example8.js>
+[promise chaining example 8](examples/example8.js)
 
 5. Q library (nfcall, ninvoke, Q(), Q.reject(), Q.all())
 6. best practices and common pitfalls (define vars, wrap everything with Q, call done)
