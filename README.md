@@ -222,17 +222,14 @@ the "this" variable is not in the scope of this blog post, so just trust me on t
 
 #9. tips and tricks
 
-so now that we know how our code should like usually (regular 3rd party applications, wrapped with Q functions, with the methodology we mentioned), there are a few additional tricks that one can use.
+so now that we know how our code should look like usually (regular 3rd party applications, wrapped with Q functions, with the methodology we mentioned), there are a few additional tricks that one can use.
 
 * deferred to promise binding: 
 in some cases, we don't yet have the promise that we want to return.
-for example, consider a promise that is the aggregation of several other promises (with using Q.all, for example)
-we need to return a promise, but we don't yet have all of the promises (maybe a dynamic amount) on which we want to wait.
-we will have it eventually, just not right now when defining the function.
 we can bind a deferred to a promise.
 in fact, this is probably how promise chaining works.
 
-[example of promise chaining](examples/example11)
+[example of promise chaining via binding promise to deferred](examples/example11)
 
 
 * Q.all and Q.allSettled: 
