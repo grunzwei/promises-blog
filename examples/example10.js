@@ -1,6 +1,8 @@
 var mongoose 	= require('mongoose');
 var Q 			= require('q');
 
+Q.longStackSupport = true;
+
 function createAndVerify() {
 	
 	//declare vars
