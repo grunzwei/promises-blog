@@ -137,6 +137,45 @@ THIS COMES WITH A PERFORMANCE PENALTY and is not for production use!
 
 #6. then vs done
 
+Q promises come with a done method, that should be used as the last handler instead of then. 
+use it.
+
+what is the importance of using done and not then?
+
+the trivial:
+* done defines a default error handler that throws an exception in case you haven't overridden it.
+* then returns a promise for you to chain on, done doesn't because it expects to be the last of its chain.
+
+the technical:
+assume you have a promise. you attach a failure handler to it, using catch. you expect it to be called if the async operation fails.
+will this work?
+trivially this will work for the following flow:
+* run async process
+* return promise
+* attach error handler on promise
+* async process fails
+* deferred is rejected
+* promise error callback is invoked
+
+but what about the following use case?:
+* run async process
+* async process fails
+* deferred is rejected
+* promise error handlers are invoked
+* promise is returned
+* add error handler on promise
+
+will this work? it had better. this is just a race condition sometimes which is bad enough, but other times...
+this is a common occurance, because many times an async api doesn't really have to make an async operaiton, sometimes it can optimize, like with a cache and return a result immediatel, but must still conform to the async api.
+this means that Q must remember all exceptions and return values until "you're done with them", so that if you add event handlers even after the async operation is completed - those event handlers are invoked.
+
+this will cause a memory leak if you never reach the "you're done with them" state.
+
+the best way to inform the infrastructure that you're done is... by using done.
+
+but are you done?
+if you return the promise to the consumer, using done is their responsibility, and they may chain other then clauses on it before doing so. not your concern.
+you use done if you don't return the promise - because you're the last handler.
 
 
 #7. best practices and common pitfalls 
@@ -153,12 +192,15 @@ why do it like this?
 this is the only way to guarntee that you correspond to promise API:
 in case of error you must guarantee that you return a rejected promise, and don't throw an exception. 
 you must return a promise and no other form of value.
+
 how can you guarantee these constraints as a methodology? 
 the only instruction that you can be sure of won't throw an exception is variable declaration.
 
-so... declare variables - check.
+so...:
+declare variables - check.
 return a promise - check.
 any logic that you have runs inside a then clause and Q knows to watch those for exceptions, so error handling - check.
+use done (we know why fom section 6) - check.
 
 let's see an example:
 
