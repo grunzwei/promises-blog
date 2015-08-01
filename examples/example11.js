@@ -1,6 +1,18 @@
+
 var Q 	= require('q');
 var _ 	= require('lodash');
 var sum = require('./example1');
+
+//binding a promise to a deferred means that whatever happens to the promise, happens to the deferred, which allows chaining promises
+function bindPromiseToDeferred(promise, deferred) {
+	promise.then(function (res) {
+		console.log('promise is resolved with ' + res + ' invoking deferred resolve');
+		deferred.resolve(res);
+	},
+	function (err) {
+		deferred.reject(err);
+	})	
+}
 
 //let's implement a **VERY** naive deferred promise mechanism and see how we need to bind a deferred to a promise to support chaining
 function Deferred() {
@@ -8,6 +20,7 @@ function Deferred() {
 	function Promise() {
 		
 		var self = this;
+		self.isPromise = true;
 		
 		self.successHandlers = [];
 		self.errorHandlers = [];
@@ -32,25 +45,21 @@ function Deferred() {
 				
 				var successRes;
 				
-				try {
-					successRes = successHandler(res);
+				try {					
+					successRes = successHandler(res);					
+					console.log('result of success handler ' + successHandler.name + ' is ' + JSON.stringify(successRes));
 				}
 				catch (err) {
 					deferred.reject(err);
 				}
 				
 				if (successRes !== undefined) {					
-					if (successRes instanceof Promise) {
-						
-						//bind promise to deferred
-						successRes.then(function (res) {
-							deferred.resolve(res);
-						},
-						function (err) {
-							deferred.reject(err);
-						})
+					if (successRes.isPromise) {
+						console.log('success res is a promise, binding to deferred');
+						bindPromiseToDeferred(successRes, deferred);
 					}
 					else {
+						console.log('successRes is a value: ' + JSON.stringify(successRes));
 						deferred.resolve(successRes);
 					}
 				}				
@@ -58,27 +67,21 @@ function Deferred() {
 			
 			function errorHandlerWrapper(err) {
 				
-				var errorRes
+				var errorRes;
 				
 				try {
-					errorRes = errorHandler(err);
+					errorRes = errorHandler(err);					
 				}
 				catch (err) {
 					deferred.reject(err);
 				}
 				
 				if (errorRes !== undefined) {
-					if (errorRes instanceof Promise) {
-						
-						//bind promise to deferred
-						errorRes.then(function (res) {
-							deferred.resolve(res);
-						},
-						function (err) {
-							deferred.reject(err);
-						})
+					if (errorRes.isPromise) {
+						bindPromiseToDeferred(errorRes, deferred);
 					}
 					else {
+						console.log('errorRes: ' + successRes);
 						deferred.reject(errorRes);					
 					}
 				}			
@@ -92,7 +95,6 @@ function Deferred() {
 	}
 	
 	var self 		= this;
-	self.promises 	= [];
 	
 	this.resolve = function (res) {
 		console.log('resolving with res: ' + JSON.stringify(res));
@@ -122,6 +124,7 @@ function nfcall(/*func, arg...*/) {
 			deferred.reject(err)
 		}
 		else {
+			if (results.length === 1) results = results[0];
 			deferred.resolve(results);
 		}
 	}
@@ -132,14 +135,14 @@ function nfcall(/*func, arg...*/) {
 }
 
 nfcall(sum, 1, 2)
-	.then(function (three) {
-		console.log('should be three' + JSON.stringify(three));
+	.then(function threeAdder (three) {
+		console.log('should be three: ' + JSON.stringify(three));
 		return nfcall(sum, three, 3);
 	})
-	.then(function (six) {
-		console.log('should be six' + JSON.stringify(six));
+	.then(function sixAdder (six) {
+		console.log('should be six: ' + JSON.stringify(six));
 		return nfcall (sum, six, 4);
 	})
-	.then(function (ten) {
-		console.log('should be ten' + JSON.stringify(ten));
+	.then(function tenLogger (ten) {
+		console.log('should be ten: ' + JSON.stringify(ten));
 	});
