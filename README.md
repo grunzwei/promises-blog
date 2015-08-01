@@ -131,9 +131,41 @@ we can:
 
 [using Q helper functions in example 9](examples/example9.js)
 
+it's also worthwhile to mention tha Q can (in develpment) enhance stacktraces:
+Q.longStackSupport = true
+THIS COMES WITH A PERFORMANCE PENALTY and is not for production use!
 
-6. best practices and common pitfalls (define vars, wrap everything with Q, call done, use ninvoke and not nfcall)
-7. tips and tricks (promise binding, application to notify on deferred with chain of promises)
-8. testing (done done done)
+#6. then vs done
+
+
+
+#7. best practices and common pitfalls 
+
+now that we know Q (or a similar promises library) and realize the importance of familiarity with its API, we can learn how to use it in practice.
+
+out methodology for writing an async function is:
+* define vars, functions, but don't assign valeus to them
+* return a resolved promise
+* on that promise, add then clauses with the different logic you need to perform
+* if you don't return the promise, but just run async code - on the last then clause, don't use then, use done.
+
+why do it like this?
+this is the only way to guarntee that you correspond to promise API:
+in case of error you must guarantee that you return a rejected promise, and don't throw an exception. 
+you must return a promise and no other form of value.
+how can you guarantee these constraints as a methodology? 
+the only instruction that you can be sure of won't throw an exception is variable declaration.
+
+so... declare variables - check.
+return a promise - check.
+any logic that you have runs inside a then clause and Q knows to watch those for exceptions, so error handling - check.
+
+let's see an example:
+
+
+
+(define vars, wrap everything with Q, call done, use ninvoke and not nfcall)
+8. tips and tricks (promise binding, application to notify on deferred with chain of promises)
+9. testing (done done done)
 
 
