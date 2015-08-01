@@ -7,6 +7,9 @@ var promisedSum = require('./example6');
 promisedSum(1,2)
   .then(function (res) {
     return promisedSum (res, 3);
+  })
+  .then(function (res) {
+  	console.log('1+2+3=' + res);
   },
   function (err) {
     console.error(err);

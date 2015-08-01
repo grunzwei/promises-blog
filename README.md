@@ -129,7 +129,10 @@ we can:
 * for a rejected promise we can use Q.reject(new Error('some exception'));
 * for a promise that will be resolvd in a while we can use Q.delay(milliseconds);
 
-6. best practices and common pitfalls (define vars, wrap everything with Q, call done)
+[using Q helper functions in example 9](examples/example9.js)
+
+
+6. best practices and common pitfalls (define vars, wrap everything with Q, call done, use ninvoke and not nfcall)
 7. tips and tricks (promise binding, application to notify on deferred with chain of promises)
 8. testing (done done done)
 
