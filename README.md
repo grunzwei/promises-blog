@@ -202,7 +202,7 @@ return a promise - check.
 any logic that you have runs inside a then clause and Q knows to watch those for exceptions, so error handling - check.
 use done (we know why fom section 6) - check.
 
-let's see an example:
+[let's see a real example using mongo in example 10](examples/example10.js)
 
 
 
