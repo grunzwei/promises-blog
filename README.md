@@ -224,7 +224,7 @@ the "this" variable is not in the scope of this blog post, so just trust me on t
 
 so now that we know how our code should like usually (regular 3rd party applications, wrapped with Q functions, with the methodology we mentioned), there are a few additional tricks that one can use.
 
-* promise binding: 
+* deferred to promise binding: 
 in some cases, we don't yet have the promise that we want to return.
 for example, consider a promise that is the aggregation of several other promises (with using Q.all, for example)
 we need to return a promise, but we don't yet have all of the promises (maybe a dynamic amount) on which we want to wait.
