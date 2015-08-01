@@ -128,6 +128,7 @@ we can:
 * if we want a promise that's pre-resolved, to be consistent with promise API though we're not really async we can just return Q(returnValue)
 * for a rejected promise we can use Q.reject(new Error('some exception'));
 * for a promise that will be resolvd in a while we can use Q.delay(milliseconds);
+* aggregate promises with Q.all and Q.allSettled. 
 
 [using Q helper functions in example 9](examples/example9.js)
 
@@ -205,9 +206,36 @@ use done (we know why fom section 6) - check.
 [let's see a real example using mongo in example 10](examples/example10.js)
 
 
+what else?
 
-(define vars, wrap everything with Q, call done, use ninvoke and not nfcall)
-8. tips and tricks (promise binding, application to notify on deferred with chain of promises)
+* make sure to use ninvoke when possible, and not nfcall.
+ninvoke runs a method of an object, while nfcall is for stand alone functions. don't use nfcall on methods.
+this is because in javascript the "this" variable loses context depending on how a function is invoked.
+also, bind only works the first time to set the "this" value constantly.
+the "this" variable is not in the scope of this blog post, so just trust me on this, and if you need more information, just ask.
+
+* if you pass bound callbacks to then clauses make sure you understand when the bind operation takes place and which variables it bind, cause they're probably not initialized yet if you use our methodology
+
+#8. tips and tricks
+
+so now that we know how our code should like usually (regular 3rd party applications, wrapped with Q functions, with the methodology we mentioned), there are a few additional tricks that one can use.
+
+* promise binding: 
+in some cases, we don't yet have the promise that we want to return.
+for example, consider a promise that is the aggregation of several other promises (with using Q.all, for example)
+we need to return a promise, but we don't yet have all of the promises (maybe a dynamic amount) on which we want to wait.
+we will have it eventually, just not right now when defining the function.
+we can bind a deferred to a promise.
+in fact, this is probably how promise chaining works.
+
+[example of promise chaining](examples/example11)
+
+
+* Q.all and Q.allSettled: 
+when combined with map, we can generate per entry in an array a promise via an async function, return it in the map, and wrap with Q.all
+
+application to notify on deferred with chain of promises)
+
 9. testing (done done done)
 
 
