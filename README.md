@@ -179,7 +179,7 @@ if you return the promise to the consumer, using done is their responsibility, a
 you use done if you don't return the promise - because you're the last handler.
 
 
-#7. best practices and common pitfalls 
+#7. best practices 
 
 now that we know Q (or a similar promises library) and realize the importance of familiarity with its API, we can learn how to use it in practice.
 
@@ -206,7 +206,7 @@ use done (we know why fom section 6) - check.
 [let's see a real example using mongo in example 10](examples/example10.js)
 
 
-what else?
+#8. common pitfalls 
 
 * make sure to use ninvoke when possible, and not nfcall.
 ninvoke runs a method of an object, while nfcall is for stand alone functions. don't use nfcall on methods.
@@ -216,7 +216,11 @@ the "this" variable is not in the scope of this blog post, so just trust me on t
 
 * if you pass bound callbacks to then clauses make sure you understand when the bind operation takes place and which variables it bind, cause they're probably not initialized yet if you use our methodology
 
-#8. tips and tricks
+* make sure any async node function you wrap with q is a standard async callback. for example, fs.exists from node file-system is not standard: the first arg is nor err. can't wrap it with q easily.
+
+* if the async callback returns more than one value as a result - Q will invoke the promise success handler with a single arg that is an array. be warned.
+
+#9. tips and tricks
 
 so now that we know how our code should like usually (regular 3rd party applications, wrapped with Q functions, with the methodology we mentioned), there are a few additional tricks that one can use.
 
@@ -236,6 +240,6 @@ when combined with map, we can generate per entry in an array a promise via an a
 
 application to notify on deferred with chain of promises)
 
-9. testing (done done done)
+#10. testing (done done done)
 
 
