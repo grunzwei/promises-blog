@@ -115,7 +115,20 @@ if it returns a reject promise, or throws an exception, a new error will propaga
 
 [promise chaining example 8](examples/example8.js)
 
-5. Q library (nfcall, ninvoke, Q(), Q.reject(), Q.all())
+#5. Q library 
+
+in reality, we use deferrals and promises directly - rarely. this is because converting a standard node asynchronous function to a promise returning function is pretty standard.
+that's why the Q library provides some helper functions to do exactly that.
+
+we can: 
+* take a standard node async function with callback, and create a promise returning function by using Q.nbind.
+* invoke a standard node async function without the callback and get back a promise by using Q.nfcall.
+* we can do the same for methods with n.invoke
+* if we want something like function.apply() because we have an array of arguments we can use Q.npost and Q.napply
+* if we want a promise that's pre-resolved, to be consistent with promise API though we're not really async we can just return Q(returnValue)
+* for a rejected promise we can use Q.reject(new Error('some exception'));
+* for a promise that will be resolvd in a while we can use Q.delay(milliseconds);
+
 6. best practices and common pitfalls (define vars, wrap everything with Q, call done)
 7. tips and tricks (promise binding, application to notify on deferred with chain of promises)
 8. testing (done done done)
