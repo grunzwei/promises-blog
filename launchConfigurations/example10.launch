@@ -1,0 +1,20 @@
+{
+  "ServiceId": "io.codefresh.orion.client.node.runner",
+  "Params": {
+    "Target": {
+      "Cmd": [
+        "node",
+        "examples/example10.js"
+      ],
+      "Node": "",
+      "NodeParams": "",
+      "WorkDir": "",
+      "JSFile": "examples/example10.js",
+      "AppParameters": "",
+      "Envs": [],
+      "StartScript": ""
+    },
+    "Name": "promises-blog"
+  },
+  "Type": "NodeRunner"
+}
