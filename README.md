@@ -3,9 +3,15 @@ a blog about proper promises methodology
 
 #our real-life promises methodology
 
-in this blog post we'll present real life best practices that we've gathered for working with promises, the libraries we use, the methodologies we've developed, the common pitfalls we're aware of and how we test such code.
-we'll be starting at the level of a node newbie and progressing as things get more advanced.
-we'll be using misc async modules to make our point, based on mock "setTimeout" based examples, through node fs module, mongoose with mongodb and dockerode for controlling docker via remote api.
+we'll cover:
+* real life best practices that we've gathered for working with promises
+* the libraries we use
+* the methodologies we've developed 
+* the common pitfalls we're aware of 
+* how we test such code.
+
+we'll start at the level of a node newbie and progress as things get more advanced.
+our examples will be focused primarily on on mock "setTimeout" async examples, but we'll play with mongoose with mongodb and maybe node fs module.
 
 #1. async programming in nodejs - standard node callbacks
 
