@@ -49,8 +49,7 @@ function createVerifyAndDelete() {
 			if (foundEntries.length !== 0) {
 				throw new Error('entry should have been removed');
 			};	
-		})
-		.done();
+		});
 
 }
 
