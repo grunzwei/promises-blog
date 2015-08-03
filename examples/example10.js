@@ -6,7 +6,7 @@ Q.longStackSupport = true;
 function createVerifyAndDelete() {
 	
 	//declare vars
-	var Entry;
+	var Entry, createdEntry;
 	
 	//return promise
 	return Q()
@@ -24,7 +24,8 @@ function createVerifyAndDelete() {
 		.then(function () {
 			return Q.ninvoke(Entry, 'create', { field1: 'example1f1' , field2: 'examplef2'});
 		})
-		.then(function (createdEntry) {
+		.then(function (_createdEntry) {
+			createdEntry = _createdEntry;
 			return Q.ninvoke(Entry, 'find', { _id: createdEntry._id});
 		})
 		.then(function (foundEntries) {
@@ -45,7 +46,7 @@ function createVerifyAndDelete() {
 		.then(function () {
 			return Q.ninvoke(Entry, 'find', { _id: createdEntry._id});
 		})
-		.then(function () {
+		.then(function (foundEntries) {
 			if (foundEntries.length !== 0) {
 				throw new Error('entry should have been removed');
 			};	
