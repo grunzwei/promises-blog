@@ -4,10 +4,14 @@ a blog about proper promises methodology
 #our real-life promises methodology
 
 we'll cover:
-* real life best practices that we've gathered for working with promises
+* async operations in node
+* pain with callback standard
+* promises
+* promises chaining
 * the libraries we use
-* the methodologies we've developed 
+* real life best practices that we've gathered for working with promises
 * the common pitfalls we're aware of 
+* tips and tricks
 * how we test such code.
 
 we'll start at the level of a node newbie and progress as things get more advanced.
