@@ -1,8 +1,9 @@
-# promises-blog
+#this is a blog about promises in node.js
 a blog about proper promises methodology
+this blog exists as a repository in https://github.com/grunzwei-fresh/promises-blog and can be opened with https://beta.codefresh.com
+you can read the blog in the README.md file and view the examples in the code editor, play with the terminal and run the examples via the run configurations area at the top, where a configuration exists per example.
 
-#our real-life promises methodology
-
+#in this blog
 we'll cover:
 * async operations in node
 * pain with callback standard
