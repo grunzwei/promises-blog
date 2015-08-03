@@ -3,7 +3,7 @@ var Q 			= require('q');
 
 Q.longStackSupport = true;
 
-function createAndVerify() {
+function createVerifyAndDelete() {
 	
 	//declare vars
 	var Entry;
@@ -22,7 +22,7 @@ function createAndVerify() {
 		})
 		//now an asyc sequence
 		.then(function () {
-			return Q.ninvoke(Entry, 'create', { field1: 'example1f1' , field2: 'examplef2'}));
+			return Q.ninvoke(Entry, 'create', { field1: 'example1f1' , field2: 'examplef2'});
 		})
 		.then(function (createdEntry) {
 			return Q.ninvoke(Entry, 'find', { _id: createdEntry._id});
@@ -39,8 +39,18 @@ function createAndVerify() {
 		})
 		//finish with a then because we return the promise
 		.then(function (verifiedEntry) {
+			console.log('found entry: ' + JSON.stringify(verifiedEntry));
 			return Q.ninvoke(Entry, 'remove', { _id : verifiedEntry._id });
-		});
+		})
+		.then(function () {
+			return Q.ninvoke(Entry, 'find', { _id: createdEntry._id});
+		})
+		.then(function () {
+			if (foundEntries.length !== 0) {
+				throw new Error('entry should have been removed');
+			};	
+		})
+		.done();
 
 }
 
