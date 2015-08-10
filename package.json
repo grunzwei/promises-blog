@@ -16,7 +16,7 @@
     "mocha": "^2.2.5"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/mocha/bin/mocha examples"
   },
   "repository": {
     "type": "git",
