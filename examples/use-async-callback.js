@@ -1,4 +1,4 @@
-var sum = require('./async-sum-callback.js');
+var sum = require('./async-sum-callback');
 var _ 	= require('lodash');
 
 describe('node standard async callback functions', function () {
