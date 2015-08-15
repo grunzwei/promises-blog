@@ -1,0 +1,14 @@
+{
+  "ServiceId": "io.codefresh.orion.client.node.runner",
+  "Params": {
+    "Target": {
+      "Node": "node",
+      "NodeParams": "",
+      "WorkDir": "/workdir/grunzwei-fresh/promises-blog",
+      "JSFile": "node_modules/mocha/bin/mocha",
+      "AppParameters": "examples/nesting-async-callback.js"
+    },
+    "Name": "example 2 - nesting async function with callback"
+  },
+  "Type": "NodeRunner"
+}
