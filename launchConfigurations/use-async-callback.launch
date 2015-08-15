@@ -5,10 +5,10 @@
       "Node": "node",
       "NodeParams": "",
       "WorkDir": "/workdir/grunzwei-fresh/promises-blog",
-      "JSFile": "/workdir/grunzwei-fresh/promises-blog/examples/example1.js",
+      "JSFile": "node_modules/mocha/bin/mocha examples/use-async-callback.js",
       "AppParameters": ""
     },
-    "Name": "example 1 - async function with callback"
+    "Name": "example 1 - using async function with callback"
   },
   "Type": "NodeRunner"
 }
