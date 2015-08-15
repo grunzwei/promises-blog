@@ -1,4 +1,6 @@
 
+var _ = require('lodash');
+
 /**
  * @callback sumCallback
  * @param: {Error} err - error object in case of failure to perform sum
@@ -18,7 +20,13 @@ function sum(augend, addend, callback) {
   //we say at least because of node's single-threaded nature, which means that the event loop may not be availble
   //at all if the node interpreter is running some blocking function.
   setTimeout(function () {
-    callback(null, augend + addend)
+  	if (_.isNumber(augend) && _.isNumber(addend)) {
+	  	var sum = augend + addend;
+	    callback(null, sum)
+    }
+    else {
+    	callback(new Error('sum input parameters must be numbers'));
+    }
   }, 0);
 }
 
