@@ -17,7 +17,7 @@ describe('node standard async callback functions', function () {
 			});
 		});
 		
-		it ('when erronous error should be contain error object', function (done) {
+		it ('when erronous error should be an error object', function (done) {
 			sum(undefined, 7, function (err, sumResult) {
 			  if (err && _.isError(err)) {
 			  	done();
