@@ -5,10 +5,10 @@
       "Node": "node",
       "NodeParams": "",
       "WorkDir": "/workdir/grunzwei-fresh/promises-blog",
-      "JSFile": "/workdir/grunzwei-fresh/promises-blog/examples/example4.js",
-      "AppParameters": ""
+      "JSFile": "node_modules/mocha/bin/mocha",
+      "AppParameters": "examples/throwing-async-callback.js"
     },
-    "Name": "example 4 - using an async function with callback several times with error handling"
+    "Name": "example 3 - async function with callback that still throw an exception, arrrrggggg"
   },
   "Type": "NodeRunner"
 }
