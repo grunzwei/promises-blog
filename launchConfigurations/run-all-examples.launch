@@ -1,0 +1,21 @@
+{
+  "ServiceId": "io.codefresh.orion.client.node.runner",
+  "Params": {
+    "Target": {
+      "Cmd": [
+        "node",
+        "node_modules/mocha/bin/mocha",
+        "./examples"
+      ],
+      "Node": "node",
+      "NodeParams": "",
+      "WorkDir": "",
+      "JSFile": "node_modules/mocha/bin/mocha",
+      "AppParameters": "./examples",
+      "Envs": [],
+      "StartScript": ""
+    },
+    "Name": "promises-blog"
+  },
+  "Type": "NodeRunner"
+}
